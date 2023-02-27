@@ -4,6 +4,7 @@ import exception.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Users {
 
@@ -24,9 +25,9 @@ public class Users {
     }
 
     public List<String> getUserNames() {
-        final List<String> userNames = new ArrayList<>();
-        users.forEach(user -> userNames.add(user.getName()));
-        return userNames;
+        return users.stream()
+                .map(User::getName)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void validateUserNamesEmpty(final List<String> userNames) {
